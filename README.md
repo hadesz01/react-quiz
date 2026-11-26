@@ -1,27 +1,47 @@
-# React Quiz Practice
+# React Quiz
 
-## Chạy trên máy
-1. Cài Node.js bản LTS.
-2. Giải nén thư mục, mở terminal tại thư mục `react-quiz`.
-3. Chạy:
-   ```bash
-   npm install
-   npm run dev
-   ```
-4. Mở địa chỉ Vite hiển thị trong terminal (thường là http://localhost:5173).
+Ứng dụng trắc nghiệm React + Vite, dùng dữ liệu JSON tĩnh trong `public/res/`.
 
-## Thêm bộ câu hỏi mới
-- Thêm `question_2.json`, `answer_2.json`, `resionable_2.json` vào `public/res/`.
-- Sửa `public/res/manifest.json`:
-  ```json
-  { "datasets": ["1", "2"] }
-  ```
-- Tên `resionable` được giữ đúng như tên file bạn đang dùng.
+## Chạy local
 
-## Cấu trúc dữ liệu
-- `question_N.json`: object theo ID câu hỏi; mỗi câu có `question`, `type`, và các lựa chọn `A`, `B`, `C`...
-- `type`: dùng `single` cho radio hoặc `multi` cho checkbox. Code cũng chấp nhận `mutil` vì file mẫu hiện tại đang dùng giá trị này.
-- `answer_N.json`: mỗi ID là mảng đáp án, ví dụ `"5": ["B", "D"]`.
-- `resionable_N.json`: mỗi ID là object giải thích theo từng lựa chọn, ví dụ `"5": {"A": "...", "B": "..."}`.
+```bash
+npm install
+npm run dev
+```
 
-Lưu ý: Đây là web tĩnh. Các JSON trong `public/res/` sẽ được tải công khai từ trình duyệt, không đặt dữ liệu bí mật trong đó.
+## Build production
+
+```bash
+npm run build
+npm run preview
+```
+
+Bản build được tạo trong thư mục `dist/`.
+
+## Tính năng
+
+- Chọn bộ câu hỏi từ `public/res/manifest.json`.
+- Hỗ trợ câu hỏi chọn một hoặc nhiều đáp án (`single`, `multi` hoặc `mutil`).
+- Hiển thị đáp án và giải thích sau khi nộp.
+- Chuyển giao diện sáng/tối; lựa chọn được lưu trên trình duyệt.
+- Đồng hồ đếm ngược nhập giờ/phút, Start/Pause/Reset và cảnh báo khi hết giờ.
+- Nhập tên người làm bài; tiến độ và lựa chọn được tự động lưu trong `localStorage` theo tên + bộ đề.
+- Skip câu hỏi, dùng thanh số câu để quay lại; tổng kết số đúng, sai và chưa trả lời.
+
+## Lưu ý về lưu tiến độ
+
+Tiến độ được lưu trên trình duyệt và thiết bị hiện tại, không đồng bộ lên GitHub hoặc giữa các thiết bị. Nếu xóa dữ liệu trang web/trình duyệt, tiến độ đã lưu có thể mất.
+
+## Thêm bộ câu hỏi
+
+Thêm ba file tương ứng vào `public/res/`:
+
+- `question_2.json`
+- `answer_2.json`
+- `resionable_2.json`
+
+Sau đó thêm ID vào `public/res/manifest.json`, ví dụ:
+
+```json
+{ "datasets": ["1", "2"] }
+```
